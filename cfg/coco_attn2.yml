@@ -1,0 +1,43 @@
+CONFIG_NAME: 'attn2'
+
+DATASET_NAME: 'coco'
+DATA_DIR: '../data/coco'
+GPU_ID: 0
+WORKERS: 4
+CONTRASTIVE_TYPE: "fake_real"  # fake_fake
+CONTRASTIVE_LOSS_LAMBDA: 1.0     # fake_real 0.5   fake_fake 0.2
+
+DAMSM_EPOCH: 700
+
+TREE:
+    BRANCH_NUM: 3
+DAMSM_EPOCH: 601
+
+TRAIN:
+    FLAG: True
+    NET_G: ''  # '../models/coco_AttnGAN2.pth'
+    B_NET_D: True
+    BATCH_SIZE: 26  # 32
+    MAX_EPOCH: 150
+    SNAPSHOT_INTERVAL: 5
+    DISCRIMINATOR_LR: 0.0002
+    GENERATOR_LR: 0.0002
+    NF: 32
+    #
+    NET_E: '../DAMSMencoders/coco/text_encoder100.pth'
+    SMOOTH:
+        GAMMA1: 4.0  # 1,2,5 good 4 best  10&100bad
+        GAMMA2: 5.0
+        GAMMA3: 10.0  # 10good 1&100bad
+        LAMBDA: 5.0
+
+
+GAN:
+    DF_DIM: 96
+    GF_DIM: 48
+    Z_DIM: 100
+    R_NUM: 3
+
+TEXT:
+    EMBEDDING_DIM: 256
+    CAPTIONS_PER_IMAGE: 5

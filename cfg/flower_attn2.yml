@@ -1,0 +1,40 @@
+CONFIG_NAME: 'attn2'
+
+DATASET_NAME: 'flowers'
+DATA_DIR: '../data/flowers'
+GPU_ID: 0
+WORKERS: 1
+CONTRASTIVE_TYPE: "fake_real"  # fake_fake
+CONTRASTIVE_LOSS_LAMBDA: 1.0     # fake_real 0.5   fake_fake 0.2
+
+TREE:
+    BRANCH_NUM: 3
+DAMSM_EPOCH: 800
+
+TRAIN:
+    FLAG: True
+    NET_G: ''# '../models/current_netG_epoch_400.pth'
+    B_NET_D: True
+    BATCH_SIZE: 10  # 24
+    MAX_EPOCH: 800
+    SNAPSHOT_INTERVAL: 50
+    DISCRIMINATOR_LR: 0.0002
+    GENERATOR_LR: 0.0002
+    NF: 30
+    NET_E: '../DAMSMencoders/flowers/text_encoder100.pth'
+    SMOOTH:
+        GAMMA1: 4.0  # 1,2,5 good 4 best  10&100bad
+        GAMMA2: 5.0
+        GAMMA3: 10.0  # 10good 1&100bad
+        LAMBDA: 2.0
+
+
+GAN:
+    DF_DIM: 64
+    GF_DIM: 32
+    Z_DIM: 100
+    R_NUM: 2
+
+TEXT:
+    EMBEDDING_DIM: 256
+    CAPTIONS_PER_IMAGE: 10
